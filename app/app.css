@@ -3,7 +3,7 @@
 body {
     font-family: "Ubuntu";
     background: #32383D;
-    color: #AAA;
+    color: #AFAFAF;
     cursor: default;
     margin: 0;
 }
@@ -26,24 +26,52 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #AAA;
+    background: #AFAFAF;
+}
+
+p {
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 
 /* Song */
 
-songs {}
-
-song {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: block;
+.song {
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
     width: 100%;
     padding: 15px;
+    padding-left: 65px;
+    transition: all 0.1s;
     box-sizing: border-box;
-    transition: all 0.2s;
 }
 
-song:hover {
-    background: rgba(255, 255, 255, 0.05);
+.song:first-of-type {
+    border-top: none;
+}
+
+.song:last-of-type {
+    border-bottom: 0;
+}
+
+.song:hover {
+    background: rgba(255, 255, 255, 0.01);
+    color: #EEE;
     border-color: transparent;
+}
+
+.song:active {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.song div {
+    font-size: smaller;
+    opacity: 0.7;
+}
+
+.song img {
+    width: 40px;
+    position: absolute;
+    left: 15px;
+    opacity: 0.4;
 }

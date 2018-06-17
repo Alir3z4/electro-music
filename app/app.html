@@ -16,12 +16,14 @@
 
 <body ng-app="electro-music" ng-controller="MainController">
   <!-- Song list -->
-  <songs ng-if="!checking">
+  <div ng-if="!checking">
     <!-- Song -->
-    <song class="blue-grey darken-4" ng-repeat="song in songs">
-      {{ song.name }}
-    </song>
-  </songs>
+    <div class="song" ng-repeat="song in songs">
+      <img src="../assets/img/music.png">
+      <p><b>{{ song.tags.title }}</b></p>
+      <div>{{ song.tags.artist }}</div>
+    </div>
+  </div>
 </body>
 
 </html>
