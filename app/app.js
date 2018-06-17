@@ -7,33 +7,11 @@ var app = angular.module("electro-music", []);
  */
 app.controller("MainController", function ($scope, $timeout) {
 
-  // Checking for data
-  $scope.checking = true;
+    // Store shared data
+    $scope.shared = currentWindow.shared;
 
-  // Check for files
-  var checkShared = function () {
-
-    // Is there any data
-    if (currentWindow.shared.files) {
-
-      // Store shared data
-      $scope.shared = currentWindow.shared;
-
-      // Get songs
-      $scope.songs = $scope.shared.files;
-
-      // Done checking
-      $scope.checking = false;
-    }
-
-    // No data, check again
-    else {
-      $timeout(checkShared, 1000);
-    }
-  }
-
-  // Start checking for shared data
-  checkShared();
+    // Get songs
+    $scope.songs = $scope.shared.files;
 });
 
 /**
