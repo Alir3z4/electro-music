@@ -1,5 +1,11 @@
 const { app, BrowserWindow } = require("electron")
 const fs = require("fs")
+const jsmediatags = require("jsmediatags");
+
+/**
+ * @type {number}
+ */
+const fileLimit = 500;
 
 /**
  * @type {Electron.BrowserWindow}
@@ -37,16 +43,22 @@ let getFiles = function (path) {
           // Read it's files and folders again
           getFiles(filePath);
         }
-        // Is a file and has mp3 ext?
+        // Is an mp3 file?
         else if (file.indexOf(".mp3") !== -1) {
           // Store to files
-          if (shared.files.length < 10) {
-            shared.files.push({
-              id: file,
-              path: filePath,
-              url: "file://" + filePath,
-              artist: "Artist",
-              title: file
+          if (shared.files.length <= fileLimit) {
+            jsmediatags.read(filePath, {
+              onSuccess: function (tag) {
+                shared.files.push({
+                  path: filePath,
+                  url: "file://" + filePath,
+                  name: file,
+                  tags: tag.tags
+                });
+              },
+              onError: function (error) {
+                console.log("Error on getting file tag", error.type, error.info);
+              }
             });
           }
         }
@@ -65,7 +77,7 @@ app.on("ready", () => {
     width: 480,
     height: 720,
     minWidth: 400,
-      minHeight: 300,
+    minHeight: 300,
     autoHideMenuBar: true,
     titleBarStyle: "hidden",
     title: "Electro Music",
