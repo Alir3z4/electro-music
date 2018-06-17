@@ -47,7 +47,7 @@ let getFiles = function (path) {
         else if (file.indexOf(".mp3") !== -1) {
           // Store to files
           if (shared.files.length <= fileLimit) {
-            new jsmediatags.Reader(filePath).setTagsToRead(["title", "artist", "album"]).read({
+            new jsmediatags.Reader(filePath).setTagsToRead(["title", "artist", "album", "picture"]).read({
               onSuccess: function (tag) {
                 shared.files.push({
                   path: filePath,
