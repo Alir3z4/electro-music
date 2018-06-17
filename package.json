@@ -1,0 +1,20 @@
+{
+  "name": "electron-music",
+  "version": "0.1.0",
+  "description": "Simple music player to learn more about electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^2.0.2"
+  },
+  "author": "Amir Savand",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.7.2",
+    "angular-soundmanager2": "Qleek/angular-soundmanager2#0040cab",
+    "bootstrap": "^4.1.1",
+    "font-awesome": "^4.7.0"
+  }
+}
