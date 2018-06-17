@@ -82,7 +82,7 @@ app.on("ready", () => {
     titleBarStyle: "hidden",
     title: "Electro Music",
     icon: "./app/app.png",
-    backgroundColor: "#333"
+    backgroundColor: "#32383D"
   })
 
   // Share shared data
