@@ -1,29 +1,39 @@
 var electron = require("electron");
 var currentWindow = electron.remote.getCurrentWindow();
-var app = angular.module("electro-music", ["angularSoundManager"]);
+var app = angular.module("electro-music", []);
 
 /**
  * Main controller
  */
-app.controller("MainController", function ($scope, angularPlayer) {
+app.controller("MainController", function ($scope, $timeout) {
 
-  // Store shared data
-  $scope.shared = currentWindow.shared;
+  // Checking for data
+  $scope.checking = true;
 
-  // Repeat by default
-  angularPlayer.repeatToggle();
+  // Check for files
+  var checkShared = function () {
 
-  /**
-   * On angular player ready
-   */
-  $scope.$on("angularPlayer:ready", function (event, data) {
-    // Add all files to playlist
-    angular.forEach($scope.shared.files, function (file, index) {
-      angularPlayer.addTrack(file);
-    });
-    // Auto play
-    angularPlayer.play();
-  });
+    // Is there any data
+    if (currentWindow.shared.files) {
+
+      // Store shared data
+      $scope.shared = currentWindow.shared;
+
+      // Get songs
+      $scope.songs = $scope.shared.files;
+
+      // Done checking
+      $scope.checking = false;
+    }
+
+    // No data, check again
+    else {
+      $timeout(checkShared, 1000);
+    }
+  }
+
+  // Start checking for shared data
+  checkShared();
 });
 
 /**
@@ -31,10 +41,9 @@ app.controller("MainController", function ($scope, angularPlayer) {
  */
 app.filter("duration", function ($filter) {
   return function (seconds) {
-    var output = $filter("date")(new Date(0, 0, 0).setSeconds(seconds), "HH:mm:ss");
-    if (output.toString().indexOf("00:") === 0) {
-      output = $filter("date")(new Date(0, 0, 0).setSeconds(seconds), "mm:ss");
+    if (seconds >= 3600) {
+      var output = $filter("date")(new Date(0, 0, 0).setSeconds(seconds), "HH:mm:ss");
     }
-    return output;
+    return $filter("date")(new Date(0, 0, 0).setSeconds(seconds), "mm:ss");
   };
-})
+});

@@ -6,59 +6,25 @@
   <title>Electro Music</title>
 
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="app.css">
 
   <script src="../node_modules/angular/angular.js"></script>
-  <script src="../node_modules/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
   <script src="app.js"></script>
 </head>
 
 <body ng-app="electro-music" ng-controller="MainController">
 
-  <!-- Initial sound manager -->
-  <sound-manager></sound-manager>
+  <!-- Checking -->
+  <h2 class="text-center" ng-if="checking">Gathering your music...</h2>
 
   <!-- Song list -->
-  <ul class="list-group list-group-flush">
-    <a href="#" class="list-group-item bg-dark text-light" ng-repeat="song in shared.files | limitTo:10" music-player="play" add-song="song">
-      {{ song.artist }} &bull; {{ song.title }}
-      <i ng-if="currentPlaying.id === song.id" class="float-right fa fa-play-circle mt-1"></i>
-    </a>
+  <ul class="list-group list-group-flush" ng-if="!checking">
+
+    <!-- Song -->
+    <li class="list-group-item bg-dark text-light" ng-repeat="song in songs">
+      {{ song.name }}
+    </li>
   </ul>
-
-  <!-- Current song -->
-  <div class="text-center mt-2" ng-if="currentPlaying">
-    <!-- Aritist and title -->
-    {{ currentPlaying.artist }} &bull; {{ currentPlaying.title }}<br>
-    <!-- Position and duration -->
-    <small>{{ currentPostion }} / {{ currentDuration }}</small>
-  </div>
-
-  <!-- Controls -->
-  <div class="text-center">
-    <!-- Prev -->
-    <button class="btn btn-lg btn-outline-light border-circle m-2" prev-track>
-      <i class="fa fa-backward"></i>
-    </button>
-    <!-- Play -->
-    <button class="btn btn-lg btn-light border-circle m-2" play-music ng-if="!isPlaying">
-      <i class="fa fa-play"></i>
-    </button>
-    <!-- Pause -->
-    <button class="btn btn-lg btn-light border-circle m-2" pause-music ng-if="isPlaying">
-      <i class="fa fa-pause"></i>
-    </button>
-    <!-- Next -->
-    <button class="btn btn-lg btn-outline-light border-circle m-2" next-track>
-      <i class="fa fa-forward"></i>
-    </button>
-  </div>
-
-  <!-- Progress -->
-  <div class="progress bg-dark mt-2" style="height: 5px;">
-    <div class="progress-bar bg-warning" style="width: {{ progress }}%"></div>
-  </div>
 </body>
 
 </html>
