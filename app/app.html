@@ -3,9 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+
   <title>Electro Music</title>
 
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app.css">
 
   <script src="../node_modules/angular/angular.js"></script>
@@ -13,18 +15,13 @@
 </head>
 
 <body ng-app="electro-music" ng-controller="MainController">
-
-  <!-- Checking -->
-  <h2 class="text-center" ng-if="checking">Gathering your music...</h2>
-
   <!-- Song list -->
-  <ul class="list-group list-group-flush" ng-if="!checking">
-
+  <songs ng-if="!checking">
     <!-- Song -->
-    <li class="list-group-item bg-dark text-light" ng-repeat="song in songs">
+    <song class="blue-grey darken-4" ng-repeat="song in songs">
       {{ song.name }}
-    </li>
-  </ul>
+    </song>
+  </songs>
 </body>
 
 </html>
